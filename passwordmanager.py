@@ -1,4 +1,5 @@
 import tkinter as tk
+import sqlite3
 
 class manager:
     # init creates manager window and takes username from welcome
@@ -40,8 +41,31 @@ class manager:
         self.master.mainloop()
 
     # takes entries and saves them into the db
+    # needs to create table if not exists
     def save_info(self):
         print(self.username)
+
+        self.account = self.entry_account.get()
+        self.password = self.entry_password.get()
+        self.email = self.entry_email.get()
+
+        connection = sqlite3.connect("user_databases/" + self.username + ".db")
+        cursor = connection.cursor()
+
+        # create table if it is not already existing
+        cursor.execute("CREATE TABLE IF NOT EXISTS data( \
+                        account TEXT, \
+                        password TEXT,\
+                        email TEXT)")
+
+        # insert information from entries into table
+        cursor.execute("INSERT INTO data(account, password, email) \
+                       VALUES (?, ?, ?)",
+                      (self.account, self.password,self.email))
+
+        # commit changes to table and close connection
+        connection.commit()
+        connection.close()
 
     # clears entries
     def clear_info(self):
