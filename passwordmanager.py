@@ -45,10 +45,12 @@ class manager:
     def save_info(self):
         print(self.username)
 
+        # get entered information
         self.account = self.entry_account.get()
         self.password = self.entry_password.get()
         self.email = self.entry_email.get()
 
+        # conncet to user specific db
         connection = sqlite3.connect("user_databases/" + self.username + ".db")
         cursor = connection.cursor()
 
