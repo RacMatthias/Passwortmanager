@@ -10,7 +10,7 @@ class welcome:
         self.master = tk.Tk()
 
         # changing title of window
-        self.master.title("Log in")
+        self.master.title("Passwordmanager - Log in")
 
         # labels for entry forms
         ttk.Label(self.master, text="Username").grid(row=0)
@@ -43,7 +43,6 @@ class welcome:
     # information the user submits into that file
     def create_account(self):
         self.feedback["text"] = ""
-
         # get informations from entries
         self.username = self.entry_username.get()
         self.password = self.entry_password.get()
